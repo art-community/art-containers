@@ -8,6 +8,7 @@ import io.art.core.extensions.FileExtensions.writeFile
 import io.art.http.communicator.HttpCommunicator
 import io.art.http.kotlin.http
 import io.art.http.kotlin.httpConnector
+import io.art.http.path.HttpCommunicationUri.manual
 import io.art.launcher.kotlin.activator
 import io.art.linux.local.container.meta.MetaContainer
 import io.art.linux.local.container.model.Configuration
@@ -43,11 +44,11 @@ fun main(arguments: Array<String>) = activator(arguments) {
     http {
         communicator { communicator ->
             communicator.connector(DownloadConnector::class.java) { downloader ->
-                downloader.url("https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-minirootfs-3.15.0-x86_64.tar.gz")
+                downloader.url("https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-minirootfs-3.15.0-x86_64.tar.gz").uri(manual(""))
             }
         }
     }
-    onLaunch {
+    ONLAUNCH {
         val input = context().configuration().arguments
 
         if (input.size() == 0) {

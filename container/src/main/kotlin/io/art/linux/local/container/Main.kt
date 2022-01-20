@@ -17,6 +17,7 @@ import io.art.transport.kotlin.transport
 import io.art.yaml.kotlin.toYaml
 import io.art.yaml.kotlin.yaml
 import java.nio.file.Files.list
+import kotlin.streams.asSequence
 
 fun printOutput(message: String) = when {
     terminalSupportColors() -> println(additional("(art.local): ") + success(message))
@@ -52,7 +53,7 @@ fun main(arguments: Array<String>) = activator(arguments) {
         }
 
         if (input.size() == 1 && input[0] == "list") {
-            printOutput(list(context().configuration().workingDirectory).toArray().toYaml())
+            printOutput(list(context().configuration().workingDirectory).asSequence().toList().toYaml())
             return@onLaunch
         }
 

@@ -28,6 +28,7 @@ art {
                 tests()
                 meta()
                 yaml()
+                http()
             }
         }
     }

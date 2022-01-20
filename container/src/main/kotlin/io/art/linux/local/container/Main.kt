@@ -72,7 +72,7 @@ fun main(arguments: Array<String>) = activator(arguments) {
                     .getFile()
                     .apply { writeFile("alpine.tar.gz", this) }
             printOutput("Unpacking alpine.tar.gz...")
-            ProcessBuilder("tar", "xf", "alpine.tar.gz")
+            ProcessBuilder("tar", "xf", "../alpine.tar.gz")
                     .redirectErrorStream(true)
                     .directory(File("").resolve("альпы"))
                     .start()

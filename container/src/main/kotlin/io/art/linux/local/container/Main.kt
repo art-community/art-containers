@@ -3,6 +3,7 @@ package io.art.linux.local.container
 import io.art.configurator.kotlin.configurator
 import io.art.core.checker.TerminalChecker.terminalSupportColors
 import io.art.core.context.Context.context
+import io.art.core.extensions.ThreadExtensions.block
 import io.art.launcher.kotlin.activator
 import io.art.linux.local.container.meta.MetaContainer
 import io.art.linux.local.container.model.Configuration
@@ -36,6 +37,8 @@ fun main(arguments: Array<String>) = activator(arguments) {
     configurator()
     yaml()
     onLaunch {
+        printOutput("I am demon")
+
         val input = context().configuration().arguments
 
         if (input.size() == 0) {
@@ -60,4 +63,5 @@ fun main(arguments: Array<String>) = activator(arguments) {
         printError("Wrong arguments. Please go to: https://animego.org/ for some brains")
     }
     launch()
+    block()
 }

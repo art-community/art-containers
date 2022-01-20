@@ -21,7 +21,7 @@ fun printError(message: String) = when {
     else -> println("(art.local): $message")
 }
 
-fun main() = activator {
+fun main(arguments: Array<String>) = activator(arguments) {
     transport()
     scheduler()
     configurator()

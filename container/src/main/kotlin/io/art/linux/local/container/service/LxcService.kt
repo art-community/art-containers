@@ -11,6 +11,10 @@ object LxcService {
     fun configuration() = Configuration
 
     object Configuration {
-        operator fun get(key: String): String = toJavaString(lxc_get_global_config_item(toCString(key).get()))
+        operator fun get(key: String): String {
+            val transformedKey = toCString(key)
+            val keyPointer = transformedKey.get()
+            return toJavaString(lxc_get_global_config_item(keyPointer))
+        }
     }
 }

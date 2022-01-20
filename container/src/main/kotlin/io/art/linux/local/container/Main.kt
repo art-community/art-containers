@@ -40,7 +40,7 @@ fun main(arguments: Array<String>) = activator(arguments) {
             return@onLaunch
         }
 
-        printError("Wrong arguments count. Please go to: https://animego.org/ for some brains")
+        printError("Wrong arguments. Please go to: https://animego.org/ for some brains")
     }
     launch()
 }

@@ -41,7 +41,7 @@ public class GraalLxc {
         public static native CCharPointer lxc_get_global_config_item(CCharPointer key);
 
         @CFunction(value = "lxc_container_new")
-        public static native lxc_container lxc_container_new(CCharPointer name, CCharPointer configpath);
+        public static native lxc_container lxc_container_new(CCharPointer name, CCharPointer configurationPath);
 
         @CStruct(addStructKeyword = true, isIncomplete = true, value = "lxc_container")
         public interface lxc_container extends PointerBase {
@@ -54,7 +54,7 @@ public class GraalLxc {
 
         public interface is_defined_function extends CFunctionPointer {
             @InvokeCFunctionPointer
-            boolean invoke(lxc_container c);
+            boolean invoke(lxc_container container);
         }
     }
 }

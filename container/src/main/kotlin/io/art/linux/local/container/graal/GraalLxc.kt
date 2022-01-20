@@ -3,6 +3,7 @@ package io.art.linux.local.container.graal
 import io.art.core.graal.GraalSingleLibrary
 import org.graalvm.nativeimage.c.CContext
 import org.graalvm.nativeimage.c.function.CFunction
+import org.graalvm.nativeimage.c.type.CCharPointer
 
 @CContext(GraalLxc.Directives::class)
 object GraalLxc {
@@ -28,5 +29,5 @@ object GraalLxc {
     }
 
     @CFunction(value = "lxc_get_version")
-    external fun lxc_get_version(): String
+    external fun lxc_get_version(): CCharPointer
 }

@@ -20,7 +20,11 @@ object GraalLxc {
         }
 
         override fun getLibraries(): MutableList<String> {
-            return directive.libraries
+            return directive.libraries.toMutableList().apply {
+                add("ssl")
+                add("crypt")
+                add("selinux")
+            }
         }
 
         override fun getLibraryPaths(): MutableList<String> {

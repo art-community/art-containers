@@ -44,7 +44,7 @@ fun main(arguments: Array<String>) = activator(arguments) {
     http {
         communicator { communicator ->
             communicator.connector(DownloadConnector::class.java) { downloader ->
-                downloader.url("https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-minirootfs-3.15.0-x86_64.tar.gz").uri(manual(""))
+                downloader.url("https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64").uri(manual("alpine-minirootfs-3.15.0-x86_64.tar.gz"))
             }
         }
     }

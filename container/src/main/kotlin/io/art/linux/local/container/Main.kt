@@ -48,7 +48,7 @@ fun main(arguments: Array<String>) = activator(arguments) {
             }
         }
     }
-    ONLAUNCH {
+    onLaunch {
         val input = context().configuration().arguments
 
         if (input.size() == 0) {

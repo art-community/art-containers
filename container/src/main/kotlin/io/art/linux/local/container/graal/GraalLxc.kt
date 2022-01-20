@@ -31,5 +31,5 @@ object GraalLxc {
     external fun lxc_get_version(): CCharPointer
 
     @CFunction(value = "lxc_get_global_config_item")
-    external fun lxc_get_global_config_item(key: CCharPointer): CCharPointer
+    external fun lxc_get_global_config_item(key: String): CCharPointer
 }

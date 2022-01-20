@@ -1,5 +1,6 @@
 package io.art.linux.local.container.graal;
 
+import io.art.core.factory.*;
 import io.art.core.graal.*;
 import org.graalvm.nativeimage.c.*;
 import org.graalvm.nativeimage.c.function.*;
@@ -22,7 +23,7 @@ public class GraalLxc {
         }
 
         public List<String> getLibraries() {
-            List<String> libraries = directive.getLibraries();
+            List<String> libraries = ArrayFactory.dynamicArrayOf(directive.getLibraries());
             libraries.add("ssl");
             libraries.add("crypto");
             libraries.add("selinux");

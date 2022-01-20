@@ -2,6 +2,7 @@ package io.art.linux.local.container.graal;
 
 import io.art.core.factory.*;
 import io.art.core.graal.*;
+import lombok.*;
 import org.graalvm.nativeimage.c.*;
 import org.graalvm.nativeimage.c.function.*;
 import org.graalvm.nativeimage.c.struct.*;
@@ -12,6 +13,7 @@ import java.util.*;
 
 @CContext(GraalLxc.Directives.class)
 public class GraalLxc {
+    @Getter
     public static final class Directives implements CContext.Directives {
         private final GraalNativeDirective directive = singleLibrary()
                 .libraryFileName("lxc")
@@ -19,11 +21,10 @@ public class GraalLxc {
                 .build()
                 .directive()
                 .build();
+        private final List<String> headerFiles = directive.getHeaders();
+        private final List<String> libraryPaths = directive.getLibraryPaths();
 
-        public List<String> getHeaderFiles() {
-            return directive.getHeaders();
-        }
-
+        @Override
         public List<String> getLibraries() {
             List<String> libraries = ArrayFactory.dynamicArrayOf(directive.getLibraries());
             libraries.add("ssl");
@@ -31,10 +32,6 @@ public class GraalLxc {
             libraries.add("selinux");
             libraries.add("util");
             return libraries;
-        }
-
-        public List<String> getLibraryPaths() {
-            return directive.getLibraryPaths();
         }
 
         @CFunction(value = "lxc_get_version")
@@ -57,7 +54,7 @@ public class GraalLxc {
 
         public interface is_fined_pointer extends CFunctionPointer {
             @InvokeCFunctionPointer
-            boolean is_defined(lxc_container c);
+            boolean invoke(lxc_container c);
         }
     }
 }

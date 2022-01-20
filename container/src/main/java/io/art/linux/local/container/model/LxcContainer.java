@@ -1,15 +1,15 @@
 package io.art.linux.local.container.model;
 
+import lombok.*;
+import lombok.experimental.*;
+import static io.art.linux.local.container.graal.GraalLxc.Directives.*;
+import static org.graalvm.nativeimage.c.type.CTypeConversion.*;
+
 public class LxcContainer {
+    @Getter
+    @Accessors(fluent = true)
     private final String name;
     private final lxc_container owner;
-
-    public LxcContainer(String name) {
-        this.name = name;
-        try (CCharPointerHolder pin = toCString(name)) {
-            this.owner = lxc_container_new(pin.get(), WordFactory.nullPointer());
-        }
-    }
 
     public LxcContainer(lxc_container owner) {
         this.name = toJavaString(owner.name());
@@ -17,10 +17,6 @@ public class LxcContainer {
     }
 
     public boolean defined() {
-        return owner.is_defined().is_defined(owner);
-    }
-
-    public String name() {
-        return name;
+        return owner.is_defined().invoke(owner);
     }
 }

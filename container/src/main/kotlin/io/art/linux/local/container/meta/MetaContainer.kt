@@ -73,36 +73,34 @@ public class MetaContainer : MetaLibrary {
                 private val `constructor`: MetaConstructorConstructor =
                     register(MetaConstructorConstructor())
 
-                private val artVersionField: MetaField<String> =
-                    register(MetaField("artVersion",metaType<String>(String::class.java),false))
+                private val artField: MetaField<String> =
+                    register(MetaField("art",metaType<String>(String::class.java),false))
 
-                private final val getArtVersionMethod: MetaGetArtVersionMethod =
-                    register(MetaGetArtVersionMethod())
+                private final val getArtMethod: MetaGetArtMethod = register(MetaGetArtMethod())
 
-                private val lxcVersionField: MetaField<String> =
-                    register(MetaField("lxcVersion",metaType<String>(String::class.java),false))
+                private val lxcField: MetaField<String> =
+                    register(MetaField("lxc",metaType<String>(String::class.java),false))
 
-                private final val getLxcVersionMethod: MetaGetLxcVersionMethod =
-                    register(MetaGetLxcVersionMethod())
+                private final val getLxcMethod: MetaGetLxcMethod = register(MetaGetLxcMethod())
 
                 internal constructor() : super(metaType<Configuration>(Configuration::class.java))
 
                 public fun `constructor`(): MetaConstructorConstructor = constructor
 
-                public fun artVersionField(): MetaField<String> = artVersionField
+                public fun artField(): MetaField<String> = artField
 
-                public fun getArtVersionMethod(): MetaGetArtVersionMethod = getArtVersionMethod
+                public fun getArtMethod(): MetaGetArtMethod = getArtMethod
 
-                public fun lxcVersionField(): MetaField<String> = lxcVersionField
+                public fun lxcField(): MetaField<String> = lxcField
 
-                public fun getLxcVersionMethod(): MetaGetLxcVersionMethod = getLxcVersionMethod
+                public fun getLxcMethod(): MetaGetLxcMethod = getLxcMethod
 
                 public class MetaConstructorConstructor : MetaConstructor<Configuration> {
-                  private val artVersionParameter: MetaParameter<String> = register(MetaParameter(0,
-                      "artVersion",metaType<String>(String::class.java)))
+                  private val artParameter: MetaParameter<String> = register(MetaParameter(0,
+                      "art",metaType<String>(String::class.java)))
 
-                  private val lxcVersionParameter: MetaParameter<String> = register(MetaParameter(1,
-                      "lxcVersion",metaType<String>(String::class.java)))
+                  private val lxcParameter: MetaParameter<String> = register(MetaParameter(1,
+                      "lxc",metaType<String>(String::class.java)))
 
                   internal constructor() : super(metaType<Configuration>(Configuration::class.java))
 
@@ -111,33 +109,31 @@ public class MetaContainer : MetaLibrary {
                     return Configuration(arguments[0] as String,arguments[1] as String)
                   }
 
-                  public fun artVersionParameter(): MetaParameter<String> = artVersionParameter
+                  public fun artParameter(): MetaParameter<String> = artParameter
 
-                  public fun lxcVersionParameter(): MetaParameter<String> = lxcVersionParameter
+                  public fun lxcParameter(): MetaParameter<String> = lxcParameter
                 }
 
-                public class MetaGetArtVersionMethod : InstanceMetaMethod<Configuration, String> {
-                  internal constructor() :
-                      super("getArtVersion",metaType<String>(String::class.java))
+                public class MetaGetArtMethod : InstanceMetaMethod<Configuration, String> {
+                  internal constructor() : super("getArt",metaType<String>(String::class.java))
 
                   @Throws(Throwable::class)
-                  public override fun invoke(instance: Configuration): Any? = instance.artVersion
+                  public override fun invoke(instance: Configuration): Any? = instance.art
 
                   @Throws(Throwable::class)
                   public override fun invoke(instance: Configuration, arguments: Array<Any>): Any? =
-                      instance.artVersion
+                      instance.art
                 }
 
-                public class MetaGetLxcVersionMethod : InstanceMetaMethod<Configuration, String> {
-                  internal constructor() :
-                      super("getLxcVersion",metaType<String>(String::class.java))
+                public class MetaGetLxcMethod : InstanceMetaMethod<Configuration, String> {
+                  internal constructor() : super("getLxc",metaType<String>(String::class.java))
 
                   @Throws(Throwable::class)
-                  public override fun invoke(instance: Configuration): Any? = instance.lxcVersion
+                  public override fun invoke(instance: Configuration): Any? = instance.lxc
 
                   @Throws(Throwable::class)
                   public override fun invoke(instance: Configuration, arguments: Array<Any>): Any? =
-                      instance.lxcVersion
+                      instance.lxc
                 }
               }
             }

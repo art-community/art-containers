@@ -4,9 +4,10 @@ import io.art.configurator.kotlin.configurator
 import io.art.core.checker.TerminalChecker.terminalSupportColors
 import io.art.core.context.Context.context
 import io.art.launcher.kotlin.activator
-import io.art.linux.local.container.graal.GraalLxcProvider.version
 import io.art.linux.local.container.meta.MetaContainer
 import io.art.linux.local.container.model.Configuration
+import io.art.linux.local.container.registry.ART_VERSION
+import io.art.linux.local.container.registry.LXC_VERSION
 import io.art.logging.colorizer.AnsiColorizer
 import io.art.logging.colorizer.AnsiColorizer.additional
 import io.art.logging.colorizer.AnsiColorizer.success
@@ -33,18 +34,19 @@ fun main(arguments: Array<String>) = activator(arguments) {
     configurator()
     yaml()
     onLaunch {
-        val arguments = context().configuration().arguments
+        val input = context().configuration().arguments
 
-        if (arguments.size() == 0) {
-            printOutput("ART Version: main")
-            printOutput("LXC Version: ${version()}")
-            printOutput("YAML: ${Configuration("main", version()).toYaml()}")
+        if (input.size() == 0) {
+            printOutput("ART Version: $ART_VERSION")
+            printOutput("LXC Version: $LXC_VERSION")
+            printOutput("YAML: ${Configuration(ART_VERSION, LXC_VERSION).toYaml()}")
             return@onLaunch
         }
 
-        if (arguments.size() == 1 && arguments[0] == "version") {
-            printOutput("ART Version: main")
-            printOutput("LXC Version: ${version()}")
+        if (input.size() == 1 && input[0] == "version") {
+            printOutput("ART Version: $ART_VERSION")
+            printOutput("LXC Version: $LXC_VERSION")
+            printOutput("YAML: ${Configuration(ART_VERSION, LXC_VERSION).toYaml()}")
             return@onLaunch
         }
 

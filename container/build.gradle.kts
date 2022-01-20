@@ -32,7 +32,9 @@ art {
         }
     }
     libraries {
+        val lombokVersion: String by project
         graal()
+        lombok(lombokVersion)
     }
     executable {
         main("io.art.linux.local.container.MainKt")

@@ -15,23 +15,16 @@ object GraalLxc {
                 .directive()
                 .build()
 
-        override fun getHeaderFiles(): MutableList<String> {
-            return directive.headers
+        override fun getHeaderFiles(): MutableList<String> = directive.headers
+
+        override fun getLibraries(): MutableList<String> = directive.libraries.toMutableList().apply {
+            add("ssl")
+            add("crypto")
+            add("selinux")
+            add("util")
         }
 
-        override fun getLibraries(): MutableList<String> {
-            return directive.libraries.toMutableList().apply {
-                add("ssl")
-                add("crypto")
-                add("selinux")
-                add("util")
-            }
-        }
-
-        override fun getLibraryPaths(): MutableList<String> {
-            return directive.libraryPaths.toMutableList().apply {
-            }
-        }
+        override fun getLibraryPaths(): MutableList<String> = directive.libraryPaths.toMutableList()
     }
 
     @CFunction(value = "lxc_get_version")

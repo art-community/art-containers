@@ -13,9 +13,10 @@ object LxcService {
 
     object Configuration {
         operator fun get(key: String): String {
-            val transformedKey = toCString(key)
-            val keyPointer: CCharPointer = transformedKey.get()
-            return toJavaString(lxc_get_global_config_item(keyPointer))
+            toCString(key).use { transformed ->
+                val keyPointer: CCharPointer = transformed.get()
+                return toJavaString(lxc_get_global_config_item(keyPointer))
+            }
         }
     }
 }

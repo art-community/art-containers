@@ -24,6 +24,7 @@ object GraalLxc {
                 add("ssl")
                 add("crypt")
                 add("selinux")
+                add("util")
             }
         }
 

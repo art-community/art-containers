@@ -2,7 +2,6 @@ package io.art.linux.local.container.service
 
 import io.art.linux.local.container.graal.GraalLxc.lxc_get_global_config_item
 import io.art.linux.local.container.graal.GraalLxc.lxc_get_version
-import org.graalvm.nativeimage.c.type.CCharPointer
 import org.graalvm.nativeimage.c.type.CTypeConversion.toCString
 import org.graalvm.nativeimage.c.type.CTypeConversion.toJavaString
 
@@ -13,9 +12,10 @@ object LxcService {
 
     object Configuration {
         operator fun get(key: String): String {
-            toCString(key).use { transformed ->
-                val keyPointer: CCharPointer = transformed.get()
-                return toJavaString(lxc_get_global_config_item(keyPointer))
+            toCString(key).use { pin ->
+                val pinValue = pin.get()
+                val itemValue = lxc_get_global_config_item(pinValue)
+                return toJavaString(itemValue)
             }
         }
     }

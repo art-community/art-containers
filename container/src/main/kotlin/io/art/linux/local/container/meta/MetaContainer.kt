@@ -1,30 +1,21 @@
 package io.art.linux.local.container.meta
 
-import io.art.http.communicator.HttpCommunicationDecorator
-import io.art.linux.local.container.DownloadConnector
 import io.art.linux.local.container.model.Configuration
 import io.art.meta.model.InstanceMetaMethod
 import io.art.meta.model.MetaClass
 import io.art.meta.model.MetaConstructor
 import io.art.meta.model.MetaField
 import io.art.meta.model.MetaLibrary
-import io.art.meta.model.MetaMethod
 import io.art.meta.model.MetaPackage
 import io.art.meta.model.MetaParameter
-import io.art.meta.model.MetaProxy
 import io.art.meta.model.MetaType.metaArray
 import io.art.meta.model.MetaType.metaEnum
 import io.art.meta.model.MetaType.metaType
-import java.util.function.Function
-import java.util.function.UnaryOperator
 import kotlin.Any
 import kotlin.Array
-import kotlin.Byte
-import kotlin.ByteArray
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Throwable
-import kotlin.collections.Map
 import kotlin.jvm.Throws
 
 @Suppress("warnings")
@@ -64,135 +55,11 @@ public class MetaContainer : MetaLibrary {
           public fun containerPackage(): MetaContainerPackage = containerPackage
 
           public class MetaContainerPackage : MetaPackage {
-            private val downloadConnectorClass: MetaDownloadConnectorClass =
-                register(MetaDownloadConnectorClass())
-
             private val modelPackage: MetaModelPackage = register(MetaModelPackage())
 
             internal constructor() : super("container")
 
-            public fun downloadConnectorClass(): MetaDownloadConnectorClass = downloadConnectorClass
-
             public fun modelPackage(): MetaModelPackage = modelPackage
-
-            public class MetaDownloadConnectorClass : MetaClass<DownloadConnector> {
-              private final val downloaderMethod: MetaDownloaderMethod =
-                  register(MetaDownloaderMethod())
-
-              private val downloaderClass: MetaDownloaderClass = register(MetaDownloaderClass())
-
-              internal constructor() :
-                  super(metaType<DownloadConnector>(DownloadConnector::class.java))
-
-              public fun downloaderMethod(): MetaDownloaderMethod = downloaderMethod
-
-              public override fun proxy(invocations: Map<MetaMethod<*>, Function<Any?, Any?>>):
-                  MetaProxy = MetaDownloadConnectorProxy(invocations)
-
-              public fun downloaderClass(): MetaDownloaderClass = downloaderClass
-
-              public class MetaDownloaderMethod :
-                  InstanceMetaMethod<DownloadConnector, DownloadConnector.Downloader> {
-                internal constructor() :
-                    super("downloader",metaType<DownloadConnector.Downloader>(DownloadConnector.Downloader::class.java))
-
-                @Throws(Throwable::class)
-                public override fun invoke(instance: DownloadConnector, arguments: Array<Any>):
-                    Any? {
-                  return instance.downloader()
-                }
-
-                @Throws(Throwable::class)
-                public override fun invoke(instance: DownloadConnector): Any? {
-                  return instance.downloader()
-                }
-              }
-
-              public inner class MetaDownloadConnectorProxy : MetaProxy, DownloadConnector {
-                private final val downloaderInvocation: Function<Any?, Any?>
-
-                public constructor(invocations: Map<MetaMethod<*>, Function<Any?, Any?>>) :
-                    super(invocations) {
-                  downloaderInvocation = invocations[downloaderMethod]!!
-                }
-
-                public override fun downloader(): DownloadConnector.Downloader =
-                    downloaderInvocation.apply(null) as DownloadConnector.Downloader
-              }
-
-              public class MetaDownloaderClass : MetaClass<DownloadConnector.Downloader> {
-                private final val getFileMethod: MetaGetFileMethod = register(MetaGetFileMethod())
-
-                private final val decorateMethod: MetaDecorateMethod =
-                    register(MetaDecorateMethod())
-
-                internal constructor() :
-                    super(metaType<DownloadConnector.Downloader>(DownloadConnector.Downloader::class.java))
-
-                public fun getFileMethod(): MetaGetFileMethod = getFileMethod
-
-                public fun decorateMethod(): MetaDecorateMethod = decorateMethod
-
-                public override fun proxy(invocations: Map<MetaMethod<*>, Function<Any?, Any?>>):
-                    MetaProxy = MetaDownloaderProxy(invocations)
-
-                public class MetaGetFileMethod :
-                    InstanceMetaMethod<DownloadConnector.Downloader, ByteArray> {
-                  internal constructor() :
-                      super("getFile",metaArray<ByteArray>(ByteArray::class.java, { size: Int ->
-                      arrayOfNulls<Byte>(size) }, metaType<Byte>(Byte::class.javaPrimitiveType)))
-
-                  @Throws(Throwable::class)
-                  public override fun invoke(instance: DownloadConnector.Downloader,
-                      arguments: Array<Any>): Any? {
-                    return instance.getFile()
-                  }
-
-                  @Throws(Throwable::class)
-                  public override fun invoke(instance: DownloadConnector.Downloader): Any? {
-                    return instance.getFile()
-                  }
-                }
-
-                public class MetaDecorateMethod :
-                    InstanceMetaMethod<DownloadConnector.Downloader, DownloadConnector.Downloader> {
-                  private val p0Parameter: MetaParameter<UnaryOperator<HttpCommunicationDecorator>>
-                      = register(MetaParameter(0,
-                      "p0",metaType<UnaryOperator<HttpCommunicationDecorator>>(UnaryOperator::class.java,metaType<HttpCommunicationDecorator>(HttpCommunicationDecorator::class.java))))
-
-                  internal constructor() :
-                      super("decorate",metaType<DownloadConnector.Downloader>(DownloadConnector.Downloader::class.java))
-
-                  @Throws(Throwable::class)
-                  public override fun invoke(instance: DownloadConnector.Downloader,
-                      arguments: Array<Any>): Any? {
-                    return instance.decorate(arguments[0] as
-                        UnaryOperator<HttpCommunicationDecorator>)
-                  }
-
-                  @Throws(Throwable::class)
-                  public override fun invoke(instance: DownloadConnector.Downloader, argument: Any):
-                      Any? {
-                    return instance.decorate(argument as UnaryOperator<HttpCommunicationDecorator>)
-                  }
-
-                  public fun p0Parameter(): MetaParameter<UnaryOperator<HttpCommunicationDecorator>>
-                      = p0Parameter
-                }
-
-                public inner class MetaDownloaderProxy : MetaProxy, DownloadConnector.Downloader {
-                  private final val getFileInvocation: Function<Any?, Any?>
-
-                  public constructor(invocations: Map<MetaMethod<*>, Function<Any?, Any?>>) :
-                      super(invocations) {
-                    getFileInvocation = invocations[getFileMethod]!!
-                  }
-
-                  public override fun getFile(): ByteArray = getFileInvocation.apply(null) as
-                      ByteArray
-                }
-              }
-            }
 
             public class MetaModelPackage : MetaPackage {
               private val configurationClass: MetaConfigurationClass =

@@ -44,6 +44,7 @@ art {
     generator {
         source("Container") {
             jvm()
+            modulePackage("io.art.linux.local.container")
             sourcesPattern {
                 include("**/src/main/kotlin/**")
             }

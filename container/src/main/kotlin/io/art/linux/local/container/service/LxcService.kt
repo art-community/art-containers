@@ -10,7 +10,6 @@ object LxcService {
 
     fun getGlobalConfiguration(key: String): String = toCString(key).use { pin ->
         val pinValue = pin.get()
-        val itemValue = lxc_get_global_config_item(pinValue)
-        return toJavaString(itemValue)
+        return toJavaString(lxc_get_global_config_item(pinValue))
     }
 }

@@ -6,6 +6,7 @@ import org.graalvm.nativeimage.c.*;
 import org.graalvm.nativeimage.c.function.*;
 import org.graalvm.nativeimage.c.struct.*;
 import org.graalvm.nativeimage.c.type.*;
+import org.graalvm.word.*;
 import static io.art.core.graal.GraalSingleLibrary.*;
 import java.util.*;
 
@@ -46,12 +47,12 @@ public class GraalLxc {
         public static native lxc_container lxc_container_new(CCharPointer name, CCharPointer configpath);
 
         @CStruct(addStructKeyword = true, isIncomplete = true, value = "lxc_container")
-        public static class lxc_container {
+        public interface lxc_container extends PointerBase {
             @CField(value = "name")
-            public native CCharPointer name();
+            CCharPointer name();
 
             @CField(value = "is_defined")
-            public native is_fined_pointer is_defined();
+            is_fined_pointer is_defined();
         }
 
         public interface is_fined_pointer extends CFunctionPointer {

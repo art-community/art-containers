@@ -2,8 +2,8 @@ package io.art.linux.local.container
 
 import io.art.configurator.kotlin.configurator
 import io.art.launcher.kotlin.activator
-import io.art.linux.local.container.service.LxcService
-import io.art.linux.local.container.service.LxcService.getGlobalConfiguration
+import io.art.linux.local.container.graal.GraalLxcProvider
+import io.art.linux.local.container.graal.GraalLxcProvider.getGlobalConfiguration
 import io.art.logging.kotlin.logger
 import io.art.logging.kotlin.logging
 import io.art.scheduler.kotlin.scheduler
@@ -17,7 +17,7 @@ fun main() = activator {
     silent()
     onLaunch {
         logger {
-            info("Hello, ART with lxc: ${LxcService.version()}")
+            info("Hello, ART with lxc: ${GraalLxcProvider.version()}")
             info("LXC Value: ${getGlobalConfiguration("lxc.net.0.link")}")
         }
     }

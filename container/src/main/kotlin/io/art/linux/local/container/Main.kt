@@ -18,7 +18,7 @@ fun main() = activator {
     onLaunch {
         logger {
             info("Hello, ART with lxc: ${GraalLxcProvider.version()}")
-            info("LXC Value: ${getGlobalConfiguration("lxc.net.0.link")}")
+            info("LXC Value: ${getGlobalConfiguration("lxc.lxcpath")}")
         }
     }
     launch()

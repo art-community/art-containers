@@ -11,12 +11,10 @@ object LxcService {
     fun configuration() = Configuration
 
     object Configuration {
-        operator fun get(key: String): String {
-            toCString(key).use { pin ->
-                val pinValue = pin.get()
-                val itemValue = lxc_get_global_config_item(pinValue)
-                return toJavaString(itemValue)
-            }
+        operator fun get(key: String): String = toCString(key).use { pin ->
+            val pinValue = pin.get()
+            val itemValue = lxc_get_global_config_item(pinValue)
+            return toJavaString(itemValue)
         }
     }
 }

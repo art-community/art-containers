@@ -14,7 +14,7 @@ fun main() = activator {
     transport()
     scheduler()
     configurator()
-    silent()
+    silent(true)
     onLaunch {
         logger {
             info("Hello, ART with lxc: ${GraalLxcProvider.version()}")

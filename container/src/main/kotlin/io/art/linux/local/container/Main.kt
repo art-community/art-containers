@@ -23,7 +23,7 @@ import io.art.transport.constants.TransportModuleConstants.DataFormat.BYTES
 import io.art.transport.kotlin.transport
 import io.art.yaml.kotlin.toYaml
 import io.art.yaml.kotlin.yaml
-import java.lang.Runtime.getRuntime
+import java.io.File
 
 fun printOutput(message: String) = when {
     terminalSupportColors() -> println(additional("(art.local): ") + success(message))
@@ -71,7 +71,11 @@ fun main(arguments: Array<String>) = activator(arguments) {
                     .decorate { decorator -> decorator.input(BYTES) }
                     .getFile()
                     .apply { writeFile("alpine.tar.gz", this) }
-            printOutput("Unpacking alpine.tar.gz...: ${getRuntime().exec(arrayOf("tar", "xf", "alpine.tar.gz"))}")
+            printOutput("Unpacking alpine.tar.gz...")
+            ProcessBuilder("tar", "xf", "alpine.tar.gz")
+                    .redirectErrorStream(true)
+                    .directory(File("").resolve("альпы"))
+                    .start()
             return@onLaunch
         }
 

@@ -52,7 +52,7 @@ fun main(arguments: Array<String>) = activator(arguments) {
         }
 
         if (input.size() == 1 && input[0] == "list") {
-            printOutput(list(context().configuration().workingDirectory).toYaml())
+            printOutput(list(context().configuration().workingDirectory).toArray().toYaml())
             return@onLaunch
         }
 

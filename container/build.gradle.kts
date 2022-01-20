@@ -36,8 +36,6 @@ art {
     executable {
         main("io.art.linux.local.container.MainKt")
         native {
-            static()
-            musl()
             disableGC()
         }
     }

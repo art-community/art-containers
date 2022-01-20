@@ -49,10 +49,10 @@ public class GraalLxc {
             CCharPointer name();
 
             @CField(value = "is_defined")
-            is_fined_pointer is_defined();
+            is_defined_function is_defined();
         }
 
-        public interface is_fined_pointer extends CFunctionPointer {
+        public interface is_defined_function extends CFunctionPointer {
             @InvokeCFunctionPointer
             boolean invoke(lxc_container c);
         }

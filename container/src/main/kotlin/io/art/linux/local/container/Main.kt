@@ -37,8 +37,6 @@ fun main(arguments: Array<String>) = activator(arguments) {
     configurator()
     yaml()
     onLaunch {
-        printOutput("I am demon")
-
         val input = context().configuration().arguments
 
         if (input.size() == 0) {
@@ -63,5 +61,4 @@ fun main(arguments: Array<String>) = activator(arguments) {
         printError("Wrong arguments. Please go to: https://animego.org/ for some brains")
     }
     launch()
-    block()
 }

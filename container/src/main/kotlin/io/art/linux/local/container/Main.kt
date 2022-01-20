@@ -16,6 +16,7 @@ import io.art.scheduler.kotlin.scheduler
 import io.art.transport.kotlin.transport
 import io.art.yaml.kotlin.toYaml
 import io.art.yaml.kotlin.yaml
+import java.nio.file.Files.list
 
 fun printOutput(message: String) = when {
     terminalSupportColors() -> println(additional("(art.local): ") + success(message))
@@ -47,6 +48,11 @@ fun main(arguments: Array<String>) = activator(arguments) {
             printOutput("ART Version: $ART_VERSION")
             printOutput("LXC Version: $LXC_VERSION")
             printOutput("YAML: ${Configuration(ART_VERSION, LXC_VERSION).toYaml()}")
+            return@onLaunch
+        }
+
+        if (input.size() == 1 && input[0] == "list") {
+            printOutput(list(context().configuration().workingDirectory).toYaml())
             return@onLaunch
         }
 

@@ -30,7 +30,7 @@ object GraalLxc {
 
         override fun getLibraryPaths(): MutableList<String> {
             return directive.libraryPaths.toMutableList().apply {
-                add("/lib/x86_64-linux-gnu")
+                add("/usr/lib/x86_64-linux-gnu")
             }
         }
     }

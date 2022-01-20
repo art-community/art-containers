@@ -27,6 +27,7 @@ art {
                 scheduler()
                 tests()
                 meta()
+                yaml()
             }
         }
     }
@@ -38,6 +39,14 @@ art {
         native {
             static()
             disableGC()
+        }
+    }
+    generator {
+        source("Container") {
+            jvm()
+            sourcesPattern {
+                include("**/src/main/kotlin/**")
+            }
         }
     }
 }

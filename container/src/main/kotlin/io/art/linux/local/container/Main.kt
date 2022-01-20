@@ -10,6 +10,7 @@ import io.art.logging.colorizer.AnsiColorizer.additional
 import io.art.logging.colorizer.AnsiColorizer.success
 import io.art.scheduler.kotlin.scheduler
 import io.art.transport.kotlin.transport
+import io.art.yaml.kotlin.yaml
 
 fun printOutput(message: String) = when {
     terminalSupportColors() -> println(additional("(art.local): ") + success(message))
@@ -25,6 +26,7 @@ fun main(arguments: Array<String>) = activator(arguments) {
     transport()
     scheduler()
     configurator()
+    yaml()
     onLaunch {
         val arguments = context().configuration().arguments
 

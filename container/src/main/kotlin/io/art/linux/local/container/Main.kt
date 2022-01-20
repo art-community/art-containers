@@ -14,6 +14,7 @@ fun main() = activator {
     transport()
     scheduler()
     configurator()
+    silent()
     onLaunch {
         logger {
             info("Hello, ART with lxc: ${LxcService.version()}")

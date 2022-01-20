@@ -12,21 +12,13 @@ import io.art.scheduler.kotlin.scheduler
 import io.art.transport.kotlin.transport
 
 fun log(message: String) = when {
-    terminalSupportColors() -> {
-        println(additional("(art.local): ") + success(message))
-    }
-    else -> {
-        println("(art.local): $message")
-    }
+    terminalSupportColors() -> println(additional("(art.local): ") + success(message))
+    else -> println("(art.local): $message")
 }
 
 fun error(message: String) = when {
-    terminalSupportColors() -> {
-        println(additional("(art.local): ") + AnsiColorizer.error(message))
-    }
-    else -> {
-        println("(art.local): $message")
-    }
+    terminalSupportColors() -> println(additional("(art.local): ") + AnsiColorizer.error(message))
+    else -> println("(art.local): $message")
 }
 
 fun main() = activator {

@@ -4,6 +4,7 @@ import io.art.core.factory.*;
 import io.art.core.graal.*;
 import org.graalvm.nativeimage.c.*;
 import org.graalvm.nativeimage.c.function.*;
+import org.graalvm.nativeimage.c.struct.*;
 import org.graalvm.nativeimage.c.type.*;
 import static io.art.core.graal.GraalSingleLibrary.*;
 import java.util.*;
@@ -40,5 +41,22 @@ public class GraalLxc {
 
         @CFunction(value = "lxc_get_global_config_item")
         public static native CCharPointer lxc_get_global_config_item(CCharPointer key);
+
+        @CFunction(value = "lxc_container_new")
+        public static native lxc_container lxc_container_new(CCharPointer name, CCharPointer configpath);
+
+        @CStruct(addStructKeyword = true, isIncomplete = true, value = "lxc_container")
+        public static class lxc_container {
+            @CField(value = "name")
+            public native CCharPointer name();
+
+            @CField(value = "is_defined")
+            public native is_fined_pointer is_defined();
+        }
+
+        public interface is_fined_pointer extends CFunctionPointer {
+            @InvokeCFunctionPointer
+            boolean is_defined(lxc_container c);
+        }
     }
 }

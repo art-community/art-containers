@@ -38,7 +38,7 @@ art {
         lombok(lombokVersion)
     }
     executable {
-        main("io.art.linux.local.container.MainKt")
+        main("io.art.linux.local.container.ContainerKt")
         native {
             static()
             disableGC()

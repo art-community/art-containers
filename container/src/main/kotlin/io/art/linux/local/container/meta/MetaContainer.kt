@@ -8,8 +8,6 @@ import io.art.meta.model.MetaField
 import io.art.meta.model.MetaLibrary
 import io.art.meta.model.MetaPackage
 import io.art.meta.model.MetaParameter
-import io.art.meta.model.MetaType.metaArray
-import io.art.meta.model.MetaType.metaEnum
 import io.art.meta.model.MetaType.metaType
 import kotlin.Any
 import kotlin.Array
@@ -74,12 +72,12 @@ public class MetaContainer : MetaLibrary {
                     register(MetaConstructorConstructor())
 
                 private val artField: MetaField<String> =
-                    register(MetaField("art",metaType<String>(String::class.java),false))
+                    register(MetaField("art", metaType<String>(String::class.java), false, null))
 
                 private final val getArtMethod: MetaGetArtMethod = register(MetaGetArtMethod())
 
                 private val lxcField: MetaField<String> =
-                    register(MetaField("lxc",metaType<String>(String::class.java),false))
+                    register(MetaField("lxc", metaType<String>(String::class.java), false, null))
 
                 private final val getLxcMethod: MetaGetLxcMethod = register(MetaGetLxcMethod())
 
@@ -102,7 +100,7 @@ public class MetaContainer : MetaLibrary {
                   private val lxcParameter: MetaParameter<String> = register(MetaParameter(1,
                       "lxc",metaType<String>(String::class.java)))
 
-                  internal constructor() : super(metaType<Configuration>(Configuration::class.java))
+                  internal constructor() : super(metaType<Configuration>(Configuration::class.java), null)
 
                   @Throws(Throwable::class)
                   public override fun invoke(arguments: Array<Any>): Configuration {
@@ -115,7 +113,7 @@ public class MetaContainer : MetaLibrary {
                 }
 
                 public class MetaGetArtMethod : InstanceMetaMethod<Configuration, String> {
-                  internal constructor() : super("getArt",metaType<String>(String::class.java))
+                  internal constructor() : super("getArt", metaType<String>(String::class.java), null)
 
                   @Throws(Throwable::class)
                   public override fun invoke(instance: Configuration): Any? = instance.art
@@ -126,7 +124,7 @@ public class MetaContainer : MetaLibrary {
                 }
 
                 public class MetaGetLxcMethod : InstanceMetaMethod<Configuration, String> {
-                  internal constructor() : super("getLxc",metaType<String>(String::class.java))
+                  internal constructor() : super("getLxc", metaType<String>(String::class.java), null)
 
                   @Throws(Throwable::class)
                   public override fun invoke(instance: Configuration): Any? = instance.lxc

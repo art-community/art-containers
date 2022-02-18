@@ -53,4 +53,7 @@ art {
             }
         }
     }
+    sources {
+        lxc()
+    }
 }

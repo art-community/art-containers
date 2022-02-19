@@ -54,6 +54,6 @@ art {
         }
     }
     sources {
-        lxc { nativeBuildDependsOn() }
+        lxc { beforeNativeBuild() }
     }
 }

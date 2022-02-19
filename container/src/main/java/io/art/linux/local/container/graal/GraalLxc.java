@@ -9,6 +9,8 @@ import org.graalvm.nativeimage.c.struct.*;
 import org.graalvm.nativeimage.c.type.*;
 import org.graalvm.word.*;
 import static io.art.core.graal.GraalSingleLibrary.*;
+import static io.art.linux.local.container.graal.GraalLxcConstants.*;
+import static java.util.Arrays.*;
 import java.util.*;
 
 @CContext(GraalLxc.Directives.class)
@@ -16,8 +18,8 @@ public class GraalLxc {
     @Getter
     public static final class Directives implements CContext.Directives {
         private final GraalNativeDirective directive = singleLibrary()
-                .libraryFileName("lxc")
-                .headerFileName("lxc")
+                .libraryFileName(LXC_NAME)
+                .headerFileName(LXC_NAME)
                 .build()
                 .directive()
                 .build();
@@ -27,11 +29,7 @@ public class GraalLxc {
         @Override
         public List<String> getLibraries() {
             List<String> libraries = ArrayFactory.dynamicArrayOf(directive.getLibraries());
-            libraries.add("ssl");
-            libraries.add("crypto");
-            libraries.add("selinux");
-            libraries.add("util");
-            libraries.add("cap");
+            stream(LXC_DEPENDENCIES).forEach(library -> libraries.add(library.getLibrary()));
             return libraries;
         }
 

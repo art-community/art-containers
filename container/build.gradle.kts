@@ -54,8 +54,6 @@ art {
         }
     }
     sources {
-        lxc {
-            buildDependsOn()
-        }
+        lxc { nativeBuildDependsOn() }
     }
 }

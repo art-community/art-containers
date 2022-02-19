@@ -40,6 +40,7 @@ art {
     executable {
         main("io.art.linux.local.container.ContainerKt")
         native {
+            wsl()
             static()
             disableGC()
         }
@@ -55,7 +56,6 @@ art {
     }
     sources {
         lxc(static = true) {
-            buildDependsOn()
         }
     }
 }

@@ -54,7 +54,8 @@ art {
         }
     }
     sources {
-        lxc(static = true) {
+        lxc {
+            buildDependsOn()
         }
     }
 }

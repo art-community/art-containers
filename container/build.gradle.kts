@@ -42,7 +42,6 @@ art {
         native {
             wsl()
             static()
-            disableGC()
         }
     }
     generator {

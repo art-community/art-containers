@@ -31,6 +31,7 @@ public class GraalLxc {
             libraries.add("crypto");
             libraries.add("selinux");
             libraries.add("util");
+            libraries.add("cap");
             return libraries;
         }
 
